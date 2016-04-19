@@ -16,8 +16,8 @@ set_time_limit(3000);
  
 /* connect to gmail with your credentials */
 $hostname = '{imap.gmail.com:993/imap/ssl}INBOX';
-$username = 'pipedrive@moneymax.ph';
-$password = '9amPolicyMeeting';
+$username = 'youremail@domain.com';
+$password = 'yourpassword';
  
  
 /* try to connect */
@@ -157,7 +157,7 @@ function call($id=0, $file='')
     $ch = curl_init();
 
 	$gfile = $id."-".$file;
-	$url = "http://localhost/pipedrive/index.php?gfile=$gfile";
+	$url = "http://yourdomain.com/pipedrive/index.php?gfile=$gfile";
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);

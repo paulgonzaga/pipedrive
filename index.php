@@ -159,11 +159,11 @@ function addPerson($email="", $fields=array())
 {
 	if (!$email) return 0;
 	$param = array();
-	$param["visible_to"] = 3;
+	$param["visible_to"] = 3; // visible to all
     $param["name"] = $fields[3];
     $param["email"] = $fields[5];
 	$param["phone"] = $fields[6];
-	$param["owner_id"] = 384336; // Back Office
+	$param["owner_id"] = '<your ownerid here>'; // Back Office
 	$param["e3c0c9648dc2cc175f3ca0415c519edefd4b4267"] = date("Y-m-d", strtotime($fields[0])); // date of lead
     $param["fd86114e5da793680edc151106342c4495553daa"] = date("H:i:s", strtotime($fields[0])); // time of lead
 		
@@ -236,7 +236,7 @@ function addDeal($title="", $personId, $fields=array())
 {
 	if (!$personId || !$title) return 0;
     $param = array();
-    $param["visible_to"] = 3;
+    $param["visible_to"] = 3; // visible to all
 	$param["status"] = "open";
 	$param["title"] = $title;
 	$param["person_id"] = $personId;
@@ -271,7 +271,7 @@ function addDeal($title="", $personId, $fields=array())
 
 function callAPI($endpoint="", $method="GET", $data = false)
 {
-	$apiKey = "0271d3ff32801762d95aefa1ba13711fae86d0bf"; // back office
+	$apiKey = "<your api key here>"; // back office
 	$apiUrl = "https://api.pipedrive.com/v1/".$endpoint;
     $ch = curl_init();
 
@@ -305,8 +305,8 @@ function callAPI($endpoint="", $method="GET", $data = false)
 }
 
 function sendnotif($csvfile="", $total=0, $persons=0, $deals=0) {
-	$adminEmail = "pipedrive@moneymax.ph";
-	$adminName = "MoneyMax Pipedrive";
+	$adminEmail = "youremail@domain.com";
+	$adminName = "Pipedrive";
 
     $mail = new PHPMailer(); // defaults to using php "mail()"
 //    $mail->IsSendmail(); // telling the class to use SendMail transport
@@ -314,22 +314,20 @@ function sendnotif($csvfile="", $total=0, $persons=0, $deals=0) {
     $mail->SMTPAuth   = true;                    // enable SMTP authentication
     $mail->Port       = 465; // 25;                      // set the SMTP server port
     $mail->Host       = "ssl://smtp.gmail.com";        // SMTP server
-    $mail->Username   = "pipedrive@moneymax.ph";  // SMTP server username
-    $mail->Password   = "9amPolicyMeeting";            // SMTP server password
+    $mail->Username   = "youremail@domain.com";  // SMTP server username
+    $mail->Password   = "yourpassword";            // SMTP server password
 
     $body = "This is to inform you that we already processed $csvfile with $total records.<br>";
 	$body .= "New Persons: $persons<br>";
 	$body .= "New Deals: $deals<br><br>";
-	$body .= "MoneyMax Admin";
+	$body .= "Pipedrive Admin";
 
 	$mail->AddReplyTo($adminEmail, $adminName);
 	$mail->SetFrom($adminEmail, $adminName);
 	$mail->AddReplyTo($adminEmail, $adminName);
 
 	// recipients
-//	$mail->AddAddress("pipedrive@moneymax.ph", "Pipedrive");
-	$mail->AddAddress("paul.gonzaga@compareasiagroup.com", "Paul Gonzaga");
-	$mail->AddAddress("giacomo.puccini@moneymax.ph", "Giacomo Puccini");
+	$mail->AddAddress("paulgonzaga80@gmail.com", "Paul Gonzaga");
 
 	$mail->Subject = "Pipedrive Upload";
 	$mail->AltBody = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
