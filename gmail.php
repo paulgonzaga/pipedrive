@@ -30,7 +30,7 @@ $inbox = imap_open($hostname,$username,$password) or die('Cannot connect to Gmai
  * $max_emails, puts the limit on the number of emails downloaded.
  * 
  */
-$emails = imap_search($inbox, 'FROM "info@samlino.dk"');
+$emails = imap_search($inbox, 'ALL');
  
 /* useful only if the above search is set to 'ALL' */
 $max_emails = 10;
